@@ -1,0 +1,61 @@
+/*
+Theme Name: Clinical OS Child Theme (v3.0)
+Theme URI: https://shaunlacob.com
+Description: Native WordPress Child Theme for Clinical OS rebuild. Enforces the 800px Clinical Reading Rule and Navy/Teal design DNA.
+Author: Antigravity AI
+Author URI: https://github.com/shaunacpt/clinical-os-v3-theme
+Template: astra
+Version: 1.0.0
+Text Domain: clinical-os-child
+*/
+
+/* ==========================================================================
+   🏛️ CLINICAL OS: GLOBAL DNA ENFORCEMENT
+   ========================================================================== */
+
+/* 1. Universal RTL & Background Base */
+html, body {
+    direction: rtl;
+    text-align: right;
+    background-color: #F8F9FA; /* Soft Gray */
+    color: #1B263B; /* Navy */
+}
+
+/* 2. THE 800px CLINICAL READING RULE */
+/* This ensures medical and academic content is never too wide for the human eye. */
+.entry-content, 
+.ast-container, 
+.post-content,
+.wp-site-blocks > *:not(.alignfull) {
+    max-width: 800px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+/* 3. Global Color Tokens */
+:root {
+    --clinical-navy: #1B263B;
+    --clinical-teal: #81D4A8;
+    --clinical-mint: #E8F5E9;
+    --clinical-white: #FFFFFF;
+    --clinical-gray: #F8F9FA;
+}
+
+/* 4. Title Suppression */
+/* We use Custom Hero sections for Titles to maximize 'WOW' factor */
+.entry-header, 
+.entry-title,
+.ast-archive-description {
+    display: none !important;
+}
+
+/* 5. Header & Menu Fixes (Astra Pro) */
+.main-header-bar {
+    border-bottom: 2px solid var(--clinical-teal) !important;
+}
+
+/* Fix for RTL Dropdown Arrow Offset discovered in audit */
+.ast-header-navigation-arrow {
+    margin-right: 5px !important;
+    margin-left: 0 !important;
+}
