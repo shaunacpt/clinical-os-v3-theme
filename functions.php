@@ -61,7 +61,7 @@ function clinical_os_spectra_admin_notice() {
  * Bypasses the Customizer to programmatically inject Global Options.
  */
 
-define( 'CLINICAL_OS_DESIGN_VERSION', 1 );
+define( 'CLINICAL_OS_DESIGN_VERSION', 2 );
 
 add_action( 'admin_init', 'clinical_os_enforce_astra_design_system' );
 
@@ -177,8 +177,8 @@ function clinical_os_enforce_astra_design_system() {
     update_option( 'clinical_os_design_sync_version', CLINICAL_OS_DESIGN_VERSION );
 
     // Invalidate Astra's Dynamic CSS cache
-    if ( class_exists( 'Astra_Theme_Options' ) && method_exists( 'Astra_Theme_Options', 'refresh' ) ) {
-        Astra_Theme_Options::refresh();
+    if ( function_exists( 'astra_clear_all_assets_cache' ) ) {
+        astra_clear_all_assets_cache();
     }
 }
 
