@@ -61,7 +61,7 @@ function clinical_os_spectra_admin_notice() {
  * Bypasses the Customizer to programmatically inject Global Options.
  */
 
-define( 'CLINICAL_OS_DESIGN_VERSION', 2 );
+define( 'CLINICAL_OS_DESIGN_VERSION', 3 );
 
 add_action( 'admin_init', 'clinical_os_enforce_astra_design_system' );
 
@@ -77,19 +77,22 @@ function clinical_os_enforce_astra_design_system() {
     $current_settings = get_option( 'astra-settings', array() );
 
     $clinical_os_payload = array(
-        // 1. Enforce Global Color Palette
+        // 1. Enforce Global Color Palette (Astra 4.x format)
         'global-color-palette' => array(
+            'currentPalette' => 'palette_1',
             'palette' => array(
-                0 => '#1B263B', // Accent / Primary Interactive
-                1 => '#81D4A8', // Accent Hover (Teal)
-                2 => '#1B263B', // Headings Color (Navy)
-                3 => '#374151', // Body Text Color
-                4 => '#F8F9FA', // Subtle Background (Soft Gray)
-                5 => '#FFFFFF', // Site Background
-                6 => '#81D4A8', // Border / Divider (Teal)
-                7 => '#F8F9FA', // Alt 1: Success State
-                8 => '#E5E7EB', // Alt 2: Error State
-            )
+                'palette_1' => array(
+                    'color1' => '#1B263B', // Accent / Primary Interactive (Navy)
+                    'color2' => '#81D4A8', // Accent Hover (Teal)
+                    'color3' => '#1B263B', // Headings Color (Navy)
+                    'color4' => '#374151', // Body Text Color
+                    'color5' => '#F8F9FA', // Subtle Background (Soft Gray)
+                    'color6' => '#FFFFFF', // Site Background
+                    'color7' => '#81D4A8', // Border / Divider (Teal)
+                    'color8' => '#F8F9FA', // Alt 1
+                    'color9' => '#E5E7EB', // Alt 2
+                ),
+            ),
         ),
 
         // 2. Enforce Global Typography System
