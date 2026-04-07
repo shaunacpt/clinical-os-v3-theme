@@ -17,7 +17,7 @@ function clinical_os_child_enqueue_styles() {
         wp_get_theme()->get('Version') 
     );
 }
-add_action( 'wp_enqueue_scripts', 'clinical_os_child_enqueue_styles' );
+add_action( 'wp_enqueue_scripts', 'clinical_os_child_enqueue_styles', 100 );
 
 /**
  * 🚀 4. REFINED CONTENT INJECTION (PHASE 4 - REPAIR)
