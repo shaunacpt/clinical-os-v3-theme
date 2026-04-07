@@ -3,8 +3,8 @@
   "version": 3,
   "settings": {
     "layout": {
-      "contentSize": "800px",
-      "wideSize": "1200px"
+      "contentSize": "1200px",
+      "wideSize": "1400px"
     },
     "color": {
       "palette": [
@@ -32,6 +32,11 @@
           "slug": "gray",
           "color": "#f8f9fa",
           "name": "Soft Gray"
+        },
+        {
+          "slug": "accent",
+          "color": "#00C2CB",
+          "name": "Accent Teal"
         }
       ]
     },
@@ -52,7 +57,7 @@
   },
   "styles": {
     "color": {
-      "background": "var(--wp--preset--color--gray)",
+      "background": "var(--wp--preset--color--white)",
       "text": "var(--wp--preset--color--navy)"
     },
     "typography": {
