@@ -41,11 +41,11 @@ function clinical_os_sync_final_home_page() {
     <div class="wp-block-uagb-container uagb-block-hero-text">
         <!-- wp:uagb/advanced-heading {"block_id":"hero-tagline","headingTag":"h6","textAlign":"right","textColor":"#81D4A8"} -->
         <h6 class="wp-block-uagb-advanced-heading uagb-block-hero-tagline">ברוכים הבאים - נעים להכיר</h6>
-        <!-- /wp:uagb-advanced-heading -->
+        <!-- /wp:uagb/advanced-heading -->
         
         <!-- wp:uagb/advanced-heading {"block_id":"hero-main-title","headingTag":"h1","textAlign":"right","textColor":"#1B263B"} -->
         <h1 class="wp-block-uagb-advanced-heading uagb-block-hero-main-title">שון לייקוב – בין חינוך לטיפול, כמו בין שחור ללבן, יש עולם צבעוני מאוד</h1>
-        <!-- /wp:uagb-advanced-heading -->
+        <!-- /wp:uagb/advanced-heading -->
 
         <!-- wp:paragraph {"align":"right"} -->
         <p class="has-text-align-right">אני חבר קיבוץ, מחנך, יועץ ומטפל. אני מאמין שלכל אדם יש את הכוח לחולל שינוי משמעותי בחייו. הגישה שלי משלבת ידע מקצועי עם אמפתיה עמוקה וגישה לא שיפוטית. אני מתמחה במגוון תחומים, כולל אימון חיים, תמיכה במשתמשי חומרים פסיכואקטיביים, ייעוץ משפחתי, ואינטגרציה של חוויות פסיכדליות.</p>
@@ -67,7 +67,7 @@ function clinical_os_sync_final_home_page() {
 <div class="wp-block-uagb-container uagb-block-services-section alignfull">
     <!-- wp:uagb/advanced-heading {"block_id":"serv-title","textAlign":"center","textColor":"#1B263B"} -->
     <h2 class="wp-block-uagb-advanced-heading uagb-block-serv-title">השירותים שאני מציע</h2>
-    <!-- /wp:uagb-advanced-heading -->
+    <!-- /wp:uagb/advanced-heading -->
 
     <!-- wp:uagb/container {"block_id":"services-grid","direction":"row","justifyContent":"center","gutter":30} -->
     <div class="wp-block-uagb-container uagb-block-services-grid">
@@ -91,7 +91,7 @@ function clinical_os_sync_final_home_page() {
 <div class="wp-block-uagb-container uagb-block-topics-section alignfull">
     <!-- wp:uagb/advanced-heading {"block_id":"topics-title","textAlign":"center","textColor":"#1B263B"} -->
     <h2 class="wp-block-uagb-advanced-heading uagb-block-topics-title">הנושאים בהם אני עוסק</h2>
-    <!-- /wp:uagb-advanced-heading -->
+    <!-- /wp:uagb/advanced-heading -->
 
     <!-- wp:uagb/container {"block_id":"topic-1","direction":"row-reverse","align":"wide","gutter":40} -->
     <div class="wp-block-uagb-container uagb-block-topic-1 alignwide">
@@ -144,7 +144,7 @@ function clinical_os_sync_final_home_page() {
     <div class="alignwide">
         <!-- wp:uagb/advanced-heading {"block_id":"contact-title","textAlign":"center","textColor":"#1B263B"} -->
         <h2 class="wp-block-uagb-advanced-heading uagb-block-contact-title">קבע פגישה</h2>
-        <!-- /wp:uagb-advanced-heading -->
+        <!-- /wp:uagb/advanced-heading -->
         
         <!-- wp:columns {"align":"wide"} -->
         <div class="wp-block-columns alignwide">

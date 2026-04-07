@@ -57,43 +57,58 @@ Text Domain: clinical-os-child
 }
 
 /* 📦 Core Grid Fallbacks (For Injected Blocks) */
-.uagb-block-services-grid {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 30px !important;
-    justify-content: space-between !important;
-    flex-wrap: nowrap !important;
+@media (min-width: 1025px) {
+    /* Services Grid (3 Columns) */
+    .uagb-block-services-grid {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 30px !important;
+        justify-content: center !important;
+        flex-wrap: nowrap !important;
+    }
+
+    .uagb-block-services-grid > div {
+        flex: 0 0 31% !important; /* Force 3 columns */
+        min-width: 300px !important;
+    }
+
+    /* 🧩 Z-Pattern Topics (Alternating Rows) */
+    .uagb-block-topic-1, .uagb-block-topic-3 {
+        display: flex !important;
+        flex-direction: row-reverse !important; /* Img Left, Text Right in RTL */
+        gap: 60px !important;
+        align-items: center !important;
+        margin-bottom: 100px !important;
+    }
+
+    .uagb-block-topic-2 {
+        display: flex !important;
+        flex-direction: row !important; /* Img Right, Text Left in RTL */
+        gap: 60px !important;
+        align-items: center !important;
+        margin-bottom: 100px !important;
+    }
+
+    /* 📐 Topic Content Ratios */
+    .uagb-block-t1-img, .uagb-block-t2-img, .uagb-block-t3-img,
+    .uagb-block-t1-txt, .uagb-block-t2-txt, .uagb-block-t3-txt {
+        flex: 1 1 50% !important;
+        width: 50% !important;
+    }
 }
 
-.uagb-block-services-grid > div {
-    flex: 1 1 30% !important;
-}
-
-/* 🧩 Z-Pattern Topics (Desktop) */
-.uagb-block-topic-1, .uagb-block-topic-3 {
-    display: flex !important;
-    flex-direction: row-reverse !important;
-    gap: 60px !important;
-    align-items: center !important;
-    margin-bottom: 80px !important;
-}
-
-.uagb-block-topic-2 {
-    display: flex !important;
-    flex-direction: row !important;
-    gap: 60px !important;
-    align-items: center !important;
-    margin-bottom: 80px !important;
-}
-
-/* 📐 Topic Content Ratios */
-.uagb-block-t1-img, .uagb-block-t2-img, .uagb-block-t3-img {
-    flex: 1 1 50% !important;
-}
-
-.uagb-block-t1-txt, .uagb-block-t2-txt, .uagb-block-t3-txt {
-    flex: 1 1 50% !important;
-    text-align: right !important;
+/* 📱 Mobile Adjustments */
+@media (max-width: 1024px) {
+    .uagb-block-services-grid {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    .uagb-block-topic-1, .uagb-block-topic-2, .uagb-block-topic-3 {
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: center !important;
+    }
 }
 
 /* 📏 Content Width Enforcements (RTL) */
