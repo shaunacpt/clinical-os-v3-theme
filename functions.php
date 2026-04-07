@@ -6,18 +6,95 @@
  */
 
 /**
- * Enqueue Parent Styles (Spectra One)
+ * Enqueue Parent Styles (Spectra One) with Cache Busting
  */
 function clinical_os_child_enqueue_styles() {
     $parent_style = 'spectra-one-style'; 
+    $version = time(); // Cache busting
     wp_enqueue_style( $parent_style, get_template_directory_uri() . '/style.css' );
     wp_enqueue_style( 'clinical-os-child-css', 
         get_stylesheet_directory_uri() . '/style.css', 
         array( $parent_style ), 
-        wp_get_theme()->get('Version') 
+        $version 
     );
 }
-add_action( 'wp_enqueue_scripts', 'clinical_os_child_enqueue_styles', 100 );
+add_action( 'wp_enqueue_scripts', 'clinical_os_child_enqueue_styles', 999 );
+
+/**
+ * 🛠️ NUCLEAR CSS INJECTION (Bypasses Hostinger Cache)
+ */
+function clinical_os_nuclear_css() {
+    ?>
+    <style id="clinical-os-nuclear-css">
+        /* 📱 Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed !important;
+            width: 60px !important;
+            height: 60px !important;
+            bottom: 30px !important;
+            right: 30px !important;
+            background-color: #25d366 !important;
+            color: #ffffff !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            z-index: 2147483647 !important;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+            text-decoration: none !important;
+        }
+        .whatsapp-float::after { content: "💬"; font-size: 30px; }
+
+        /* 📦 Core Grid Fallbacks */
+        @media (min-width: 1025px) {
+            .uagb-block-services-grid {
+                display: flex !important;
+                flex-direction: row !important;
+                gap: 30px !important;
+                justify-content: center !important;
+            }
+            .uagb-block-services-grid > .uagb-block-info-box {
+                flex: 0 0 31% !important;
+                width: 31% !important;
+            }
+            .uagb-block-topic-1, .uagb-block-topic-3 {
+                display: flex !important;
+                flex-direction: row-reverse !important;
+                align-items: center !important;
+                gap: 60px !important;
+                margin-bottom: 80px !important;
+            }
+            .uagb-block-topic-2 {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: center !important;
+                gap: 60px !important;
+                margin-bottom: 80px !important;
+            }
+            .uagb-block-topic-1 > div, .uagb-block-topic-2 > div, .uagb-block-topic-3 > div {
+                flex: 1 1 50% !important;
+                width: 50% !important;
+            }
+        }
+        
+        /* ⚓ Sticky Header Fix */
+        .is-sticky-header, .wp-block-template-part header {
+            position: sticky !important;
+            top: 0 !important;
+            background: #fff !important;
+            z-index: 9999 !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+        }
+
+        /* 🖼️ Hero Frame */
+        .hero-teal-frame img {
+            border: 20px solid #81D4A8 !important;
+            border-radius: 30px !important;
+        }
+    </style>
+    <?php
+}
+add_action( 'wp_head', 'clinical_os_nuclear_css', 999 );
 
 /**
  * 🚀 4. REFINED CONTENT INJECTION (PHASE 4 - REPAIR)
