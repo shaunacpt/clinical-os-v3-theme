@@ -77,14 +77,25 @@ function clinical_os_nuclear_css() {
             }
         }
         
-        /* ⚓ Sticky Header Fix */
-        .is-sticky-header, .wp-block-template-part header {
-            position: sticky !important;
+        /* ⚓ Sticky Header Fix (Nuclear) */
+        html, body { overflow-x: visible !important; } /* Prevents sticky breakage */
+        
+        header.is-sticky-header, 
+        .wp-block-template-part header,
+        .wp-block-group.is-sticky-header {
+            position: fixed !important; /* Switch to fixed for absolute reliability */
             top: 0 !important;
-            background: #fff !important;
-            z-index: 9999 !important;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            background: #ffffff !important;
+            z-index: 999999 !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1) !important;
         }
+
+        /* Offset for page content since header is now fixed */
+        body { padding-top: 80px !important; }
+        @media (max-width: 782px) { body { padding-top: 112px !important; } } /* Adjusted for admin bar */
 
         /* 🖼️ Hero Frame */
         .hero-teal-frame img {
