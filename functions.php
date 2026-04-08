@@ -78,10 +78,7 @@ function clinical_os_nuclear_css() {
         }
         
         /* ⚓ Sticky Header Fix (Nuclear) */
-        html, body { overflow-x: visible !important; } /* Prevents sticky breakage */
-        
-        /* ⚓ Sticky Header Fix (Nuclear) */
-        html, body { overflow-x: hidden !important; } /* Fixes horizontal scroll */
+        html, body { overflow-x: hidden !important; } 
         
         header.is-sticky-header, 
         .wp-block-template-part header,
@@ -98,51 +95,70 @@ function clinical_os_nuclear_css() {
 
         body { padding-top: 80px !important; }
 
-        /* 🖼️ Hero Parity */
-        .hero-title-parity {
-            text-shadow: 2px 2px 4px rgba(129, 212, 168, 0.4) !important; /* Modern Teal Glow */
-        }
-        .hero-img-parity img {
-            border: 2px solid #81D4A8 !important; /* Fixed 2px border */
-            border-radius: 30px !important;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        /* 🖼️ HERO REPAIR: Force 2-Column RTL */
+        @media (min-width: 1025px) {
+            #home-hero {
+                display: flex !important;
+                flex-direction: row !important; /* Forces Text Right / Image Left in RTL */
+                align-items: center !important;
+                justify-content: space-between !important;
+                gap: 80px !important;
+                max-width: 1200px !important;
+                margin: 0 auto !important;
+            }
+            #hero-text { flex: 0 0 55% !important; width: 55% !important; }
+            #hero-image { flex: 0 0 35% !important; width: 35% !important; }
         }
 
-        /* 🎢 Topics Slider (Flex Carousel) */
-        .topics-carousel-container {
+        .hero-title-parity {
+            color: #1B263B !important;
+            text-shadow: 2px 2px 5px rgba(129, 212, 168, 0.4) !important;
+        }
+
+        .hero-img-parity figure, .hero-img-parity img {
+            border: 2px solid #81D4A8 !important; /* Fixes the oversized border */
+            border-radius: 30px !important;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1) !important;
+            background: transparent !important; /* Removes block-level background glows */
+            padding: 0 !important;
+        }
+
+        /* 🎢 TOPICS REPAIR: Force Functional Slider */
+        #topics-carousel {
             display: flex !important;
             overflow-x: auto !important;
             scroll-snap-type: x mandatory !important;
             gap: 40px !important;
-            padding: 20px 0 !important;
+            padding: 40px 0 !important;
             -webkit-overflow-scrolling: touch;
         }
-        .topics-carousel-container::-webkit-scrollbar { display: none; }
+        #topics-carousel::-webkit-scrollbar { display: none; }
+        
         .topic-slide {
             flex: 0 0 100% !important;
             scroll-snap-align: start !important;
             display: flex !important;
-            flex-direction: row-reverse !important; /* Original RTL side-by-side */
+            flex-direction: row-reverse !important; 
             align-items: center !important;
-            gap: 40px !important;
+            gap: 60px !important;
+            background: #ffffff;
+            padding: 40px !important;
+            border-radius: 40px !important;
+            box-shadow: 0 10px 30px rgba(27, 38, 59, 0.05) !important;
         }
         @media (max-width: 768px) {
-            .topic-slide { flex-direction: column !important; }
+            .topic-slide { flex-direction: column !important; text-align: center !important; }
         }
 
-        /* 📦 Service Cards */
+        /* 📦 SERVICE CARDS */
         .service-card-parity {
-            background: #ffffff !important;
-            border-radius: 30px !important;
-            padding: 30px !important;
-            box-shadow: 0 10px 30px rgba(27, 38, 59, 0.08) !important;
-            transition: transform 0.3s ease !important;
+            box-shadow: 0 12px 35px rgba(27, 38, 59, 0.08) !important;
+            border-radius: 35px !important;
         }
-        .service-card-parity:hover { transform: translateY(-5px); }
         .service-card-parity img {
             aspect-ratio: 1/1 !important;
             object-fit: cover !important;
-            border-radius: 20px !important;
+            border-radius: 25px !important;
         }
     </style>
     <?php
@@ -325,12 +341,13 @@ function clinical_os_sync_final_home_page() {
 <!-- /wp:uagb/container -->
 BLOCKS;
 
-    $home_page_id = get_option( 'page_on_front' );
+    $home_page_id = 7; // Hard-coded target from audit
     if ( $home_page_id ) {
         wp_update_post( array(
             'ID'           => $home_page_id,
             'post_content' => $blueprint,
+            'post_status'  => 'publish', // Force publish to clear any draft shadows
         ) );
     }
 }
-add_action( 'admin_init', 'clinical_os_sync_final_home_page' );
+add_action( 'init', 'clinical_os_sync_final_home_page' ); // Move to 'init' for broader scope
