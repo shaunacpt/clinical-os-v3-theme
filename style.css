@@ -1,133 +1,288 @@
+/* FILE: style.css */
+
 /*
-Theme Name: Clinical OS Child Theme (v3.0)
-Theme URI: https://shaunlacob.com
-Description: Native WordPress Child Theme for Clinical OS FSE rebuild. Enforces 1:1 Structural Parity with Original Site while using Modern Navy/Teal colors.
-Author: Antigravity AI
-Template: spectra-one
-Version: 3.0.0
-Text Domain: clinical-os-child
-*/
+ * Theme Name: Clinical OS Child Theme
+ * Description: FSE child theme for Clinical OS — psychedelic-assisted therapy & harm reduction training platform. RTL Hebrew, Navy/Teal brand, 800px clinical reading rule.
+ * Version: 3.0
+ * Text Domain: clinical-os-v3
+ * Requires at least: 6.4
+ * Requires PHP: 8.1
+ */
 
-/* 📏 Global Layout & Reset */
-html, body { 
-    overflow-x: hidden !important; 
-    scroll-behavior: smooth;
+/* ==========================================================================
+   0. CSS CUSTOM PROPERTIES (mirror theme.json tokens for CSS use)
+   ========================================================================== */
+
+:root {
+    --cos-navy: #1B263B;
+    --cos-teal: #81D4A8;
+    --cos-mint: #E8F5E9;
+    --cos-white: #FFFFFF;
+    --cos-soft-gray: #F8F9FA;
+    --cos-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --cos-radius-pill: 50px;
+    --cos-content-width: 800px;
+    --cos-font-heading: "Outfit", sans-serif;
+    --cos-font-body: "Heebo", sans-serif;
 }
 
-.alignwide {
-    max-width: 1200px !important;
-    margin-right: auto !important;
-    margin-left: auto !important;
-}
+/* ==========================================================================
+   1. RTL UNIVERSAL ENFORCEMENT
+   ========================================================================== */
 
-/* ⚓ Sticky Header (Fixed) */
-body { padding-top: 80px !important; }
-
-/* 🖼️ Hero Section Parity */
-.hero-title-parity {
-    text-shadow: 2px 2px 5px rgba(129, 212, 168, 0.4) !important; /* Modern Teal Glow */
-    line-height: 1.2 !important;
-}
-
-.hero-img-parity img {
-    border: 2px solid var(--wp--preset--color--teal) !important;
-    border-radius: 30px !important;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12) !important;
-    transition: transform 0.4s ease !important;
-}
-
-.hero-img-parity img:hover {
-    transform: scale(1.02);
-}
-
-/* 🎢 Topics Slider (Flex Carousel) */
-.topics-carousel-container {
-    display: flex !important;
-    overflow-x: auto !important;
-    scroll-snap-type: x mandatory !important;
-    gap: 40px !important;
-    padding: 30px 20px !important;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Hide scrollbar Firefox */
-}
-
-.topics-carousel-container::-webkit-scrollbar {
-    display: none; /* Hide scrollbar Chrome/Safari */
-}
-
-.topic-slide {
-    flex: 0 0 100% !important;
-    scroll-snap-align: start !important;
-    display: flex !important;
-    flex-direction: row-reverse !important; /* Original RTL Architecture */
-    align-items: center !important;
-    gap: 60px !important;
-    background: #ffffff;
-    padding: 40px !important;
-    border-radius: 40px !important;
-    box-shadow: 0 10px 30px rgba(27, 38, 59, 0.05) !important;
-}
-
-@media (max-width: 1024px) {
-    .topic-slide {
-        flex-direction: column !important;
-        text-align: center !important;
-        padding: 30px !important;
-    }
-}
-
-/* 📦 Service Cards Parity */
-.service-card-parity {
-    background: #ffffff !important;
-    border-radius: 35px !important;
-    padding: 35px !important;
-    box-shadow: 0 12px 35px rgba(27, 38, 59, 0.08) !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    border: 1px solid rgba(27, 38, 59, 0.03) !important;
-}
-
-.service-card-parity:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 50px rgba(27, 38, 59, 0.12) !important;
-}
-
-.service-card-parity img {
-    aspect-ratio: 1/1 !important;
-    object-fit: cover !important;
-    border-radius: 25px !important;
-    margin-bottom: 25px !important;
-}
-
-/* 📱 Floating WhatsApp Button */
-.whatsapp-float {
-    position: fixed !important;
-    width: 65px !important;
-    height: 65px !important;
-    bottom: 40px !important;
-    right: 40px !important;
-    background-color: #25d366 !important;
-    color: #ffffff !important;
-    border-radius: 50% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    z-index: 9999999 !important;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
-    transition: all 0.3s ease !important;
-}
-
-.whatsapp-float:hover {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.whatsapp-float::after {
-    content: "💬";
-    font-size: 32px;
-}
-
-/* 🖍️ RTL List Calibration */
-.wp-block-list {
-    padding-right: 25px !important;
-    padding-left: 0 !important;
+html {
     direction: rtl;
+    text-align: right;
+}
+
+body {
+    direction: rtl;
+    text-align: right;
+    background-color: var(--cos-soft-gray);
+    font-family: var(--cos-font-body);
+    font-size: 20px;
+    line-height: 1.6;
+    color: var(--cos-navy);
+}
+
+/* ==========================================================================
+   2. 800PX CLINICAL READING RULE
+   ========================================================================== */
+
+.wp-block-post-content,
+.entry-content,
+.is-layout-constrained > * {
+    max-width: var(--cos-content-width);
+    margin-inline: auto;
+    padding-inline: 20px;
+    box-sizing: border-box;
+}
+
+.wp-block-post-content > *,
+.entry-content > * {
+    max-width: var(--cos-content-width);
+    margin-inline: auto;
+}
+
+/* Full-width override for hero groups that intentionally break out */
+.wp-block-post-content .alignfull,
+.entry-content .alignfull,
+.is-layout-constrained > .alignfull {
+    max-width: 100%;
+    margin-inline: calc(50% - 50vw);
+    padding-inline: 0;
+}
+
+/* Wide alignment */
+.wp-block-post-content .alignwide,
+.entry-content .alignwide,
+.is-layout-constrained > .alignwide {
+    max-width: 1000px;
+    margin-inline: auto;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--cos-font-heading);
+    line-height: 1.2;
+    color: var(--cos-navy);
+    margin-block-end: 0.5em;
+}
+
+h1 { font-size: 48px; font-weight: 700; }
+h2 { font-size: 36px; font-weight: 600; }
+h3 { font-size: 28px; font-weight: 600; }
+h4 { font-size: 22px; font-weight: 600; }
+h5 { font-size: 18px; font-weight: 500; }
+h6 { font-size: 16px; font-weight: 500; }
+
+p {
+    font-family: var(--cos-font-body);
+    font-size: 20px;
+    line-height: 1.6;
+    margin-block-end: 1em;
+}
+
+a {
+    color: var(--cos-navy);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--cos-teal);
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   4. GLOBAL HEADER
+   ========================================================================== */
+
+.wp-block-template-part[data-slug="header"],
+header.wp-block-template-part,
+.site-header,
+#masthead {
+    background-color: var(--cos-navy);
+    border-block-end: 2px solid var(--cos-teal);
+    box-shadow: var(--cos-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.wp-block-template-part[data-slug="header"] .wp-block-group,
+header.wp-block-template-part .wp-block-group {
+    background-color: var(--cos-navy);
+    padding-block: 16px;
+    padding-inline: 24px;
+}
+
+.wp-block-template-part[data-slug="header"] .wp-block-navigation a,
+header.wp-block-template-part .wp-block-navigation a,
+.site-header .wp-block-navigation a,
+#masthead .wp-block-navigation a {
+    color: var(--cos-white);
+    text-decoration: none;
+    font-family: var(--cos-font-body);
+    font-size: 16px;
+    font-weight: 500;
+    padding-inline: 12px;
+    padding-block: 6px;
+    transition: color 0.2s ease;
+}
+
+.wp-block-template-part[data-slug="header"] .wp-block-navigation a:hover,
+header.wp-block-template-part .wp-block-navigation a:hover,
+.site-header .wp-block-navigation a:hover,
+#masthead .wp-block-navigation a:hover {
+    color: var(--cos-teal);
+}
+
+/* ==========================================================================
+   5. GLOBAL FOOTER
+   ========================================================================== */
+
+.wp-block-template-part[data-slug="footer"],
+footer.wp-block-template-part,
+.site-footer,
+#colophon {
+    background-color: var(--cos-navy);
+    border-block-start: 8px solid var(--cos-teal);
+    color: var(--cos-white);
+    padding-block: 80px;
+    padding-inline: 20px;
+}
+
+.wp-block-template-part[data-slug="footer"] *,
+footer.wp-block-template-part *,
+.site-footer *,
+#colophon * {
+    color: var(--cos-white);
+}
+
+.wp-block-template-part[data-slug="footer"] a,
+footer.wp-block-template-part a,
+.site-footer a,
+#colophon a {
+    color: var(--cos-teal);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.wp-block-template-part[data-slug="footer"] a:hover,
+footer.wp-block-template-part a:hover,
+.site-footer a:hover,
+#colophon a:hover {
+    color: var(--cos-white);
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   6. BUTTON SYSTEM
+   ========================================================================== */
+
+.wp-block-button .wp-block-button__link,
+.wp-block-button__link {
+    background-color: var(--cos-navy);
+    color: var(--cos-white);
+    border: none;
+    border-radius: var(--cos-radius-pill);
+    padding-block: 14px;
+    padding-inline: 32px;
+    font-family: var(--cos-font-body);
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+    line-height: 1.4;
+}
+
+.wp-block-button .wp-block-button__link:hover,
+.wp-block-button__link:hover {
+    background-color: var(--cos-teal);
+    color: var(--cos-navy);
+    outline: none;
+}
+
+/* ==========================================================================
+   7. CLINICAL CARD COMPONENT
+   ========================================================================== */
+
+.cos-card,
+.wp-block-group.is-style-cos-card {
+    background-color: var(--cos-white);
+    border-inline-start: 4px solid var(--cos-teal);
+    border-radius: 8px;
+    padding-block: 28px;
+    padding-inline: 24px;
+    box-shadow: 0 2px 12px rgba(27, 38, 59, 0.08);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cos-card:hover,
+.wp-block-group.is-style-cos-card:hover {
+    box-shadow: 0 6px 24px rgba(27, 38, 59, 0.14);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   8. ENTRY HEADER / TITLE SUPPRESSION
+   ========================================================================== */
+
+.entry-header,
+.entry-title,
+.wp-block-post-title.page-title-hidden {
+    display: none;
+}
+
+/* ==========================================================================
+   9. RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --cos-content-width: 100%;
+    }
+    body {
+        font-size: 18px;
+    }
+    h1 { font-size: 36px; }
+    h2 { font-size: 28px; }
+    h3 { font-size: 22px; }
+}
+
+@media (max-width: 375px) {
+    body {
+        font-size: 16px;
+    }
+    h1 { font-size: 28px; }
+    h2 { font-size: 22px; }
+    h3 { font-size: 18px; }
 }
