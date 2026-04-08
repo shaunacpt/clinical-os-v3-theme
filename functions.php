@@ -80,10 +80,13 @@ function clinical_os_nuclear_css() {
         /* ⚓ Sticky Header Fix (Nuclear) */
         html, body { overflow-x: visible !important; } /* Prevents sticky breakage */
         
+        /* ⚓ Sticky Header Fix (Nuclear) */
+        html, body { overflow-x: hidden !important; } /* Fixes horizontal scroll */
+        
         header.is-sticky-header, 
         .wp-block-template-part header,
         .wp-block-group.is-sticky-header {
-            position: fixed !important; /* Switch to fixed for absolute reliability */
+            position: fixed !important; 
             top: 0 !important;
             left: 0 !important;
             right: 0 !important;
@@ -93,14 +96,53 @@ function clinical_os_nuclear_css() {
             box-shadow: 0 2px 15px rgba(0,0,0,0.1) !important;
         }
 
-        /* Offset for page content since header is now fixed */
         body { padding-top: 80px !important; }
-        @media (max-width: 782px) { body { padding-top: 112px !important; } } /* Adjusted for admin bar */
 
-        /* 🖼️ Hero Frame */
-        .hero-teal-frame img {
-            border: 20px solid #81D4A8 !important;
+        /* 🖼️ Hero Parity */
+        .hero-title-parity {
+            text-shadow: 2px 2px 4px rgba(129, 212, 168, 0.4) !important; /* Modern Teal Glow */
+        }
+        .hero-img-parity img {
+            border: 2px solid #81D4A8 !important; /* Fixed 2px border */
             border-radius: 30px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
+        }
+
+        /* 🎢 Topics Slider (Flex Carousel) */
+        .topics-carousel-container {
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            gap: 40px !important;
+            padding: 20px 0 !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        .topics-carousel-container::-webkit-scrollbar { display: none; }
+        .topic-slide {
+            flex: 0 0 100% !important;
+            scroll-snap-align: start !important;
+            display: flex !important;
+            flex-direction: row-reverse !important; /* Original RTL side-by-side */
+            align-items: center !important;
+            gap: 40px !important;
+        }
+        @media (max-width: 768px) {
+            .topic-slide { flex-direction: column !important; }
+        }
+
+        /* 📦 Service Cards */
+        .service-card-parity {
+            background: #ffffff !important;
+            border-radius: 30px !important;
+            padding: 30px !important;
+            box-shadow: 0 10px 30px rgba(27, 38, 59, 0.08) !important;
+            transition: transform 0.3s ease !important;
+        }
+        .service-card-parity:hover { transform: translateY(-5px); }
+        .service-card-parity img {
+            aspect-ratio: 1/1 !important;
+            object-fit: cover !important;
+            border-radius: 20px !important;
         }
     </style>
     <?php
@@ -115,28 +157,20 @@ function clinical_os_sync_final_home_page() {
     if ( ! is_admin() ) return;
 
     $blueprint = <<<'BLOCKS'
-<!-- wp:uagb/container {"block_id":"home-hero","contentWidth":"alignwide","direction":"row-reverse","align":"full","paddingDesktop":{"top":80,"bottom":80},"paddingType":"px"} -->
+<!-- wp:uagb/container {"block_id":"home-hero","contentWidth":"alignwide","direction":"row","align":"full","paddingDesktop":{"top":100,"bottom":100},"paddingType":"px","backgroundType":"color","backgroundColor":"#f4f8fb"} -->
 <div class="wp-block-uagb-container uagb-block-home-hero alignfull alignwide">
-    <!-- wp:uagb/container {"block_id":"hero-image","widthDesktop":45,"className":"hero-teal-frame"} -->
-    <div class="wp-block-uagb-container uagb-block-hero-image hero-teal-frame">
-        <!-- wp:image {"id":1152,"sizeSlug":"full","linkDestination":"none"} -->
-        <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/Shaun-Lacob-1152x1536.png" alt="שון לייקוב"/></figure>
-        <!-- /wp:image -->
-    </div>
-    <!-- /wp:uagb/container -->
-
-    <!-- wp:uagb/container {"block_id":"hero-text","widthDesktop":55,"justifyContent":"center"} -->
+    <!-- wp:uagb/container {"block_id":"hero-text","widthDesktop":60,"justifyContent":"center"} -->
     <div class="wp-block-uagb-container uagb-block-hero-text">
         <!-- wp:uagb/advanced-heading {"block_id":"hero-tagline","headingTag":"h6","textAlign":"right","textColor":"#81D4A8"} -->
         <h6 class="wp-block-uagb-advanced-heading uagb-block-hero-tagline">ברוכים הבאים - נעים להכיר</h6>
         <!-- /wp:uagb/advanced-heading -->
         
-        <!-- wp:uagb/advanced-heading {"block_id":"hero-main-title","headingTag":"h1","textAlign":"right","textColor":"#1B263B"} -->
-        <h1 class="wp-block-uagb-advanced-heading uagb-block-hero-main-title">שון לייקוב – בין חינוך לטיפול, כמו בין שחור ללבן, יש עולם צבעוני מאוד</h1>
+        <!-- wp:uagb/advanced-heading {"block_id":"hero-main-title","headingTag":"h1","textAlign":"right","textColor":"#1B263B","className":"hero-title-parity"} -->
+        <h1 class="wp-block-uagb-advanced-heading uagb-block-hero-main-title hero-title-parity">שון לייקוב – בין חינוך לטיפול, כמו בין שחור ללבן, יש עולם צבעוני מאוד</h1>
         <!-- /wp:uagb/advanced-heading -->
 
         <!-- wp:paragraph {"align":"right"} -->
-        <p class="has-text-align-right">אני חבר קיבוץ, מחנך, יועץ ומטפל. אני מאמין שלכל אדם יש את הכוח לחולל שינוי משמעותי בחייו. הגישה שלי משלבת ידע מקצועי עם אמפתיה עמוקה וגישה לא שיפוטית. אני מתמחה במגוון תחומים, כולל אימון חיים, תמיכה במשתמשי חומרים פסיכואקטיביים, ייעוץ משפחתי, ואינטגרציה של חוויות פסיכדליות.</p>
+        <p class="has-text-align-right">אני חבר קיבוץ, מחנך, יועץ ומטפל. אני מאמין שלכל אדם יש את הכוח לחולל שינוי משמעותי בחייו. הגישה שלי משלבת ידע מקצועי עם אמפתיה עמוקה וגישה לא שיפוטית.</p>
         <!-- /wp:paragraph -->
 
         <!-- wp:uagb/buttons {"block_id":"hero-ctas","align":"right"} -->
@@ -146,6 +180,14 @@ function clinical_os_sync_final_home_page() {
             <!-- /wp:uagb/button -->
         </div>
         <!-- /wp:uagb/buttons -->
+    </div>
+    <!-- /wp:uagb/container -->
+
+    <!-- wp:uagb/container {"block_id":"hero-image","widthDesktop":40,"className":"hero-img-parity"} -->
+    <div class="wp-block-uagb-container uagb-block-hero-image hero-img-parity">
+        <!-- wp:image {"id":1152,"sizeSlug":"full","linkDestination":"none"} -->
+        <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/Shaun-Lacob-1152x1536.png" alt="שון לייקוב"/></figure>
+        <!-- /wp:image -->
     </div>
     <!-- /wp:uagb/container -->
 </div>
@@ -159,67 +201,93 @@ function clinical_os_sync_final_home_page() {
 
     <!-- wp:uagb/container {"block_id":"services-grid","direction":"row","justifyContent":"center","gutter":30} -->
     <div class="wp-block-uagb-container uagb-block-services-grid">
-        <!-- wp:uagb/info-box {"block_id":"card-1","showImage":true,"imageURL":"https://shaunlacob.com/wp-content/uploads/g86867d82446554b263b5d54f9dac315781d5ef7a6a881f078f662d1937702757b1aeda711881486b41152bd233ab9ca5009cc373907530c9bd4abf703cbc86a1_1280-6253174.jpg","imageWidth":100,"heading":"טיפול מתמשך","ctaType":"button","ctaText":"קרא עוד"} -->
-        <div class="wp-block-uagb-info-box uagb-block-card-1"><div class="uagb-ifb-content"><img class="uagb-ifb-image" src="https://shaunlacob.com/wp-content/uploads/g86867d82446554b263b5d54f9dac315781d5ef7a6a881f078f662d1937702757b1aeda711881486b41152bd233ab9ca5009cc373907530c9bd4abf703cbc86a1_1280-6253174.jpg" alt="" style="border-radius:30px;"/><h3 class="uagb-ifb-title">טיפול מתמשך</h3><p class="uagb-ifb-desc">גישה מותאמת אישית לצרכים הייחודיים שלכם.</p><div class="uagb-ifb-cta"><a href="/meetings/" class="uagb-ifb-cta-link">קרא עוד</a></div></div></div>
-        <!-- /wp:uagb/info-box -->
+        <!-- wp:uagb/container {"block_id":"card-1","widthDesktop":30,"className":"service-card-parity"} -->
+        <div class="wp-block-uagb-container uagb-block-card-1 service-card-parity">
+            <!-- wp:image {"sizeSlug":"full"} -->
+            <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/g86867d82446554b263b5d54f9dac315781d5ef7a6a881f078f662d1937702757b1aeda711881486b41152bd233ab9ca5009cc373907530c9bd4abf703cbc86a1_1280-6253174.jpg" alt=""/></figure>
+            <!-- /wp:image -->
+            <!-- wp:heading {"level":3,"textAlign":"center"} -->
+            <h3 class="wp-block-heading has-text-align-center">טיפול מתמשך</h3>
+            <!-- /wp:heading -->
+            <!-- wp:paragraph {"align":"center"} -->
+            <p class="has-text-align-center">גישה מותאמת אישית לצרכים הייחודיים שלכם.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:uagb/container -->
 
-        <!-- wp:uagb/info-box {"block_id":"card-2","showImage":true,"imageURL":"https://shaunlacob.com/wp-content/uploads/IMG_20230222_164806-scaled.jpg","imageWidth":100,"heading":"טיפול בסיוע פסיכדליים","ctaType":"button","ctaText":"קרא עוד"} -->
-        <div class="wp-block-uagb-info-box uagb-block-card-2"><div class="uagb-ifb-content"><img class="uagb-ifb-image" src="https://shaunlacob.com/wp-content/uploads/IMG_20230222_164806-scaled.jpg" alt="" style="border-radius:30px;"/><h3 class="uagb-ifb-title">טיפול בסיוע פסיכדליים</h3><p class="uagb-ifb-desc">ליווי מקצועי בטיפולים מוכרים וחוקיים בישראל.</p><div class="uagb-ifb-cta"><a href="/workshops/" class="uagb-ifb-cta-link">קרא עוד</a></div></div></div>
-        <!-- /wp:uagb/info-box -->
+        <!-- wp:uagb/container {"block_id":"card-2","widthDesktop":30,"className":"service-card-parity"} -->
+        <div class="wp-block-uagb-container uagb-block-card-2 service-card-parity">
+            <!-- wp:image {"sizeSlug":"full"} -->
+            <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/IMG_20230222_164806-scaled.jpg" alt=""/></figure>
+            <!-- /wp:image -->
+            <!-- wp:heading {"level":3,"textAlign":"center"} -->
+            <h3 class="wp-block-heading has-text-align-center">טיפול בסיוע פסיכדליים</h3>
+            <!-- /wp:heading -->
+            <!-- wp:paragraph {"align":"center"} -->
+            <p class="has-text-align-center">ליווי מקצועי בטיפולים מוכרים וחוקיים בישראל.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:uagb/container -->
 
-        <!-- wp:uagb/info-box {"block_id":"card-3","showImage":true,"imageURL":"https://shaunlacob.com/wp-content/uploads/2019/09/April-06-2017-at-0559PM-Wize-.jpg","imageWidth":100,"heading":"הרצאות וסדנאות","ctaType":"button","ctaText":"קרא עוד"} -->
-        <div class="wp-block-uagb-info-box uagb-block-card-3"><div class="uagb-ifb-content"><img class="uagb-ifb-image" src="https://shaunlacob.com/wp-content/uploads/2019/09/April-06-2017-at-0559PM-Wize-.jpg" alt="" style="border-radius:30px;"/><h3 class="uagb-ifb-title">הרצאות וסדנאות</h3><p class="uagb-ifb-desc">הרצאות מרתקות בנושאי הפחתת נזקים.</p><div class="uagb-ifb-cta"><a href="/workshops/" class="uagb-ifb-cta-link">קרא עוד</a></div></div></div>
-        <!-- /wp:uagb/info-box -->
+        <!-- wp:uagb/container {"block_id":"card-3","widthDesktop":30,"className":"service-card-parity"} -->
+        <div class="wp-block-uagb-container uagb-block-card-3 service-card-parity">
+            <!-- wp:image {"sizeSlug":"full"} -->
+            <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/2019/09/April-06-2017-at-0559PM-Wize-.jpg" alt=""/></figure>
+            <!-- /wp:image -->
+            <!-- wp:heading {"level":3,"textAlign":"center"} -->
+            <h3 class="wp-block-heading has-text-align-center">הרצאות וסדנאות</h3>
+            <!-- /wp:heading -->
+            <!-- wp:paragraph {"align":"center"} -->
+            <p class="has-text-align-center">הרצאות מרתקות בנושאי הפחתת נזקים.</p>
+            <!-- /wp:paragraph -->
+        </div>
+        <!-- /wp:uagb/container -->
     </div>
     <!-- /wp:uagb/container -->
 </div>
 <!-- /wp:uagb/container -->
 
-<!-- wp:uagb/container {"block_id":"topics-section","align":"full","paddingDesktop":{"top":80,"bottom":80}} -->
+<!-- wp:uagb/container {"block_id":"topics-section","align":"full","paddingDesktop":{"top":80,"bottom":80},"backgroundType":"color","backgroundColor":"#f4f8fb"} -->
 <div class="wp-block-uagb-container uagb-block-topics-section alignfull">
     <!-- wp:uagb/advanced-heading {"block_id":"topics-title","textAlign":"center","textColor":"#1B263B"} -->
     <h2 class="wp-block-uagb-advanced-heading uagb-block-topics-title">הנושאים בהם אני עוסק</h2>
     <!-- /wp:uagb/advanced-heading -->
 
-    <!-- wp:uagb/container {"block_id":"topic-1","direction":"row-reverse","align":"wide","gutter":40} -->
-    <div class="wp-block-uagb-container uagb-block-topic-1 alignwide">
-        <!-- wp:uagb/container {"block_id":"t1-img","widthDesktop":50} -->
-        <div class="wp-block-uagb-container uagb-block-t1-img">
+    <!-- wp:uagb/container {"block_id":"topics-carousel","className":"topics-carousel-container"} -->
+    <div class="wp-block-uagb-container uagb-block-topics-carousel topics-carousel-container">
+        <!-- wp:uagb/container {"block_id":"slide-1","className":"topic-slide"} -->
+        <div class="wp-block-uagb-container uagb-block-slide-1 topic-slide">
             <!-- wp:image {"sizeSlug":"full"} -->
             <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/2021/04/IMG-20210214-WA0011.jpg" alt="" style="border-radius:30px;"/></figure>
             <!-- /wp:image -->
+            <!-- wp:uagb/container {"widthDesktop":50} -->
+            <div class="wp-block-uagb-container">
+                <!-- wp:heading {"level":3} -->
+                <h3 class="wp-block-heading">אינטגרציה וליווי פסיכדלי</h3>
+                <!-- /wp:heading -->
+                <!-- wp:paragraph -->
+                <p>תהליך האינטגרציה הוא השלב החשוב ביותר בעבודה עם חוויות משנות תודעה. אני עוזר למטופלים לעבד את החוויות שעברו ולהטמיע את התובנות בחיי היומיום שלהם.</p>
+                <!-- /wp:paragraph -->
+            </div>
+            <!-- /wp:uagb/container -->
         </div>
         <!-- /wp:uagb/container -->
-        <!-- wp:uagb/container {"block_id":"t1-txt","widthDesktop":50} -->
-        <div class="wp-block-uagb-container uagb-block-t1-txt">
-            <!-- wp:heading {"level":3} -->
-            <h3 class="wp-block-heading">אינטגרציה וליווי פסיכדלי</h3>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph -->
-            <p>תהליך האינטגרציה הוא השלב החשוב ביותר בעבודה עם חוויות משנות תודעה. אני עוזר למטופלים לעבד את החוויות שעברו ולהטמיע את התובנות בחיי היומיום שלהם.</p>
-            <!-- /wp:paragraph -->
-        </div>
-        <!-- /wp:uagb/container -->
-    </div>
-    <!-- /wp:uagb/container -->
 
-    <!-- wp:uagb/container {"block_id":"topic-2","direction":"row","align":"wide","gutter":40} -->
-    <div class="wp-block-uagb-container uagb-block-topic-2 alignwide">
-        <!-- wp:uagb/container {"block_id":"t2-img","widthDesktop":50} -->
-        <div class="wp-block-uagb-container uagb-block-t2-img">
+        <!-- wp:uagb/container {"block_id":"slide-2","className":"topic-slide"} -->
+        <div class="wp-block-uagb-container uagb-block-slide-2 topic-slide">
             <!-- wp:image {"sizeSlug":"full"} -->
             <figure class="wp-block-image size-full"><img src="https://shaunlacob.com/wp-content/uploads/2019/09/Harm_Reduction_Logo.png" alt="" style="border-radius:30px;"/></figure>
             <!-- /wp:image -->
-        </div>
-        <!-- /wp:uagb/container -->
-        <!-- wp:uagb/container {"block_id":"t2-txt","widthDesktop":50} -->
-        <div class="wp-block-uagb-container uagb-block-t2-txt">
-            <!-- wp:heading {"level":3} -->
-            <h3 class="wp-block-heading">הפחתת נזקים</h3>
-            <!-- /wp:heading -->
-            <!-- wp:paragraph -->
-            <p>שיטת העבודה שלי מבוססת על עקרונות המזעור הנזק. אני מאמין במתן מידע אמין, נגיש ולא שיפוטי כדי לעזור לאנשים לקבל החלטות מושכלות ובטוחות יותר.</p>
-            <!-- /wp:paragraph -->
+            <!-- wp:uagb/container {"widthDesktop":50} -->
+            <div class="wp-block-uagb-container">
+                <!-- wp:heading {"level":3} -->
+                <h3 class="wp-block-heading">הפחתת נזקים</h3>
+                <!-- /wp:heading -->
+                <!-- wp:paragraph -->
+                <p>שיטת העבודה שלי מבוססת על עקרונות המזעור הנזק. אני מאמין במתן מידע אמין, נגיש ולא שיפוטי כדי לעזור לאנשים לקבל החלטות מושכלות ובטוחות יותר.</p>
+                <!-- /wp:paragraph -->
+            </div>
+            <!-- /wp:uagb/container -->
         </div>
         <!-- /wp:uagb/container -->
     </div>

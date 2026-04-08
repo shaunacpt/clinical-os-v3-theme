@@ -1,33 +1,108 @@
 /*
 Theme Name: Clinical OS Child Theme (v3.0)
 Theme URI: https://shaunlacob.com
-Description: Native WordPress Child Theme for Clinical OS FSE rebuild. Enforces the 800px Clinical Reading Rule and Navy/Teal design DNA via theme.json.
+Description: Native WordPress Child Theme for Clinical OS FSE rebuild. Enforces 1:1 Structural Parity with Original Site while using Modern Navy/Teal colors.
 Author: Antigravity AI
-Author URI: https://github.com/shaunacpt/clinical-os-v3-theme
 Template: spectra-one
-Version: 2.0.0
+Version: 3.0.0
 Text Domain: clinical-os-child
 */
 
-/* 
- * NOTE: All global styles, typography, and colors are now managed via theme.json.
- * This style.css file is reserved for hyper-specific utility classes or 
- * third-party plugin overrides that Gutenberg cannot handle natively.
- */
+/* 📏 Global Layout & Reset */
+html, body { 
+    overflow-x: hidden !important; 
+    scroll-behavior: smooth;
+}
 
-/* 🖼️ Hero Side Frame */
-.hero-teal-frame img {
-    border: 2px solid #75E3D7; /* Light Teal from original */
-    border-radius: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    max-width: 100%;
+.alignwide {
+    max-width: 1200px !important;
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+
+/* ⚓ Sticky Header (Fixed) */
+body { padding-top: 80px !important; }
+
+/* 🖼️ Hero Section Parity */
+.hero-title-parity {
+    text-shadow: 2px 2px 5px rgba(129, 212, 168, 0.4) !important; /* Modern Teal Glow */
+    line-height: 1.2 !important;
+}
+
+.hero-img-parity img {
+    border: 2px solid var(--wp--preset--color--teal) !important;
+    border-radius: 30px !important;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12) !important;
+    transition: transform 0.4s ease !important;
+}
+
+.hero-img-parity img:hover {
+    transform: scale(1.02);
+}
+
+/* 🎢 Topics Slider (Flex Carousel) */
+.topics-carousel-container {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    gap: 40px !important;
+    padding: 30px 20px !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.topics-carousel-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+.topic-slide {
+    flex: 0 0 100% !important;
+    scroll-snap-align: start !important;
+    display: flex !important;
+    flex-direction: row-reverse !important; /* Original RTL Architecture */
+    align-items: center !important;
+    gap: 60px !important;
+    background: #ffffff;
+    padding: 40px !important;
+    border-radius: 40px !important;
+    box-shadow: 0 10px 30px rgba(27, 38, 59, 0.05) !important;
+}
+
+@media (max-width: 1024px) {
+    .topic-slide {
+        flex-direction: column !important;
+        text-align: center !important;
+        padding: 30px !important;
+    }
+}
+
+/* 📦 Service Cards Parity */
+.service-card-parity {
+    background: #ffffff !important;
+    border-radius: 35px !important;
+    padding: 35px !important;
+    box-shadow: 0 12px 35px rgba(27, 38, 59, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    border: 1px solid rgba(27, 38, 59, 0.03) !important;
+}
+
+.service-card-parity:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(27, 38, 59, 0.12) !important;
+}
+
+.service-card-parity img {
+    aspect-ratio: 1/1 !important;
+    object-fit: cover !important;
+    border-radius: 25px !important;
+    margin-bottom: 25px !important;
 }
 
 /* 📱 Floating WhatsApp Button */
 .whatsapp-float {
     position: fixed !important;
-    width: 60px !important;
-    height: 60px !important;
+    width: 65px !important;
+    height: 65px !important;
     bottom: 40px !important;
     right: 40px !important;
     background-color: #25d366 !important;
@@ -36,84 +111,23 @@ Text Domain: clinical-os-child
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    z-index: 2147483647 !important; /* Max z-index */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4) !important;
-    text-decoration: none !important;
+    z-index: 9999999 !important;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25) !important;
+    transition: all 0.3s ease !important;
 }
 
-.whatsapp-float::before {
-    content: "💬" !important; /* Fallback icon */
-    font-size: 30px !important;
+.whatsapp-float:hover {
+    transform: scale(1.1) rotate(5deg);
 }
 
-/* 📦 Core Grid Fallbacks (High Specificity) */
-@media (min-width: 1025px) {
-    body .uagb-block-services-grid,
-    body .wp-block-uagb-container.uagb-block-services-grid {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 30px !important;
-        justify-content: center !important;
-        flex-wrap: nowrap !important;
-    }
-
-    body .uagb-block-services-grid > div {
-        flex: 0 0 31% !important;
-        width: 31% !important;
-    }
-
-    /* 🧩 Z-Pattern Topics */
-    body .uagb-block-topic-1, 
-    body .uagb-block-topic-3 {
-        display: flex !important;
-        flex-direction: row-reverse !important;
-        gap: 60px !important;
-        align-items: center !important;
-    }
-
-    body .uagb-block-topic-2 {
-        display: flex !important;
-        flex-direction: row !important;
-        gap: 60px !important;
-        align-items: center !important;
-    }
-
-    body .uagb-block-t1-img, body .uagb-block-t2-img, body .uagb-block-t3-img,
-    body .uagb-block-t1-txt, body .uagb-block-t2-txt, body .uagb-block-t3-txt {
-        flex: 1 1 50% !important;
-        width: 50% !important;
-    }
+.whatsapp-float::after {
+    content: "💬";
+    font-size: 32px;
 }
 
-/* 📱 Mobile Adjustments */
-@media (max-width: 1024px) {
-    .uagb-block-services-grid {
-        display: flex !important;
-        flex-direction: column !important;
-        gap: 30px !important;
-    }
-    .uagb-block-topic-1, .uagb-block-topic-2, .uagb-block-topic-3 {
-        display: flex !important;
-        flex-direction: column !important;
-        text-align: center !important;
-    }
-}
-
-/* 📏 Content Width Enforcements (RTL) */
-.alignwide {
-    max-width: 1200px !important;
-    margin-right: auto !important;
-    margin-left: auto !important;
-}
-
-/* 🖍️ List & Bullet RTL Fixes */
+/* 🖍️ RTL List Calibration */
 .wp-block-list {
-    padding-right: 20px;
-    padding-left: 0;
+    padding-right: 25px !important;
+    padding-left: 0 !important;
     direction: rtl;
-}
-
-/* 🛠️ Image Radii */
-.uagb-ifb-image, .wp-block-image img {
-    border-radius: 30px !important;
 }
