@@ -351,3 +351,39 @@ BLOCKS;
     }
 }
 add_action( 'init', 'clinical_os_sync_final_home_page' ); // Move to 'init' for broader scope
+
+// Clinical OS v3 — FSE Enqueues, RTL, Patterns, Editor Support
+// ============================================================
+
+add_action( 'after_setup_theme', 'clinical_os_theme_support' );
+function clinical_os_theme_support() {
+    add_theme_support( 'wp-block-styles' );
+    add_theme_support( 'editor-styles' );
+    add_editor_style( 'style.css' );
+}
+
+add_action( 'wp_enqueue_scripts', 'clinical_os_enqueue_fonts' );
+function clinical_os_enqueue_fonts() {
+    wp_enqueue_style(
+        'clinical-os-google-fonts',
+        'https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700&family=Outfit:wght@600;700&display=swap',
+        array(),
+        null
+    );
+}
+
+add_filter( 'language_attributes', 'clinical_os_rtl_html_attributes' );
+function clinical_os_rtl_html_attributes( $output ) {
+    $output = preg_replace( '/dir="[^"]*"/', '', $output );
+    $output = preg_replace( '/lang="[^"]*"/', '', $output );
+    $output = 'lang="he" dir="rtl" ' . trim( $output );
+    return $output;
+}
+
+add_action( 'init', 'clinical_os_register_block_patterns' );
+function clinical_os_register_block_patterns() {
+    register_block_pattern_category(
+        'clinical-os',
+        array( 'label' => __( 'Clinical OS', 'clinical-os-v3' ) )
+    );
+}
